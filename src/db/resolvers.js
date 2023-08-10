@@ -3,8 +3,9 @@ const prisma = new PrismaClient();
 
 const resolvers = {
     Query: {
-        obtenerReviews: () => {
-            return prisma.resenia.findMany();
+        obtenerReviews: async() => {
+            const reviews = await prisma.resenia.findMany();
+            return reviews
         }
     },
     Mutation: {
