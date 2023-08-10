@@ -32,7 +32,25 @@ const resolvers = {
             const usuarioId = await jwt.verify(token, process.env.SECRET)
 
             return usuarioId
+        },
+        obtenerMensajes: async (_,{}, ctx ) => {
+            
+            try {
+                
+                let mensajes = await prisma.mensaje.findMany();
+                
+                mensajes.forEach(mensaje => {
+                    mensaje.fecha = mensaje.fecha.toISOString()
+                })
+                
+                return mensajes
+            } catch (error) {
+                console.log(error)
+            }finally{
+                await prisma.$disconnect()
+            }
         }
+
     },
     Mutation: {
         crearReview: async (_, { input }) => {
@@ -97,7 +115,28 @@ const resolvers = {
             return {
                 token: crearToken(existeUsuario, process.env.SECRET, '1h')
             }
-        }
+        },
+        crearMensaje: async (_, { input }) => {
+            const { nombre, correo, mensaje, telefono } = input;
+            
+            try {
+                
+                let nuevoMensaje = await prisma.mensaje.create({
+                    data: {
+                        nombre,
+                        correo,
+                        mensaje,
+                        telefono
+                    }
+                })
+                nuevoMensaje.fecha = nuevoMensaje.fecha.toISOString()
+                return nuevoMensaje
+            } catch (error) {
+                console.log(error)
+                
+            }
+        },
+
     }
 }
 

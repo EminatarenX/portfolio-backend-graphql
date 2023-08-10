@@ -8,13 +8,13 @@ const typeDefs = gql`
             comentario: String
             calificacion: Int
         }
-
+        
         type Usuario {
             id: ID
             nombre: String
             password: String
         }
-
+        
         
         type Token {
             token: String
@@ -26,6 +26,15 @@ const typeDefs = gql`
             comentario: String!
             calificacion: Int!
         }
+        
+        type Mensaje {
+            id: ID
+            fecha: String
+            nombre: String
+            correo: String
+            mensaje: String
+            telefono: Int
+        }
         input UsuarioInput {
             nombre: String!
             password: String!
@@ -35,19 +44,33 @@ const typeDefs = gql`
             nombre: String!
             password: String!
         }
+
+        input MensajeInput {
+            nombre: String!
+            correo: String!
+            mensaje: String!
+            telefono: Int!
+        }
         
         type Query {
+            # Reviews
             obtenerReviews: [Review]
 
-            #auth
+            # Auth
             obtenerUsuario(token: String!): Usuario
+
+            # Mensajes
+            obtenerMensajes: [Mensaje]
         }
         type Mutation {
             crearReview(input: ReviewInput!): Review
 
-        # Usuario
-        crearUsuario(input: UsuarioInput!): Usuario
-        autenticarUsuario(input: AutenticarInput): Token
+            # Usuario
+            crearUsuario(input: UsuarioInput!): Usuario
+            autenticarUsuario(input: AutenticarInput): Token
+
+            # Mensajes
+            crearMensaje(input: MensajeInput!): Mensaje
 
     }
 
