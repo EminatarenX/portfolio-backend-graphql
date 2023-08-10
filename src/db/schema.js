@@ -3,7 +3,7 @@ const { gql } = require('apollo-server');
 const typeDefs = gql`
         type Review {
             id: ID
-            fecha: Date
+            fecha: String
             nombre: String
             comentario: String
             calificacion: Int
