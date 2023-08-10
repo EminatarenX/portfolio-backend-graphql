@@ -5,6 +5,7 @@ const resolvers = {
     Query: {
         obtenerReviews: async() => {
             const reviews = await prisma.resenia.findMany();
+            console.log(reviews)
             return reviews
         }
     },
