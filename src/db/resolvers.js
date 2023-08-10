@@ -4,8 +4,12 @@ const prisma = new PrismaClient();
 const resolvers = {
     Query: {
         obtenerReviews: async() => {
-            const reviews = await prisma.resenia.findMany();
-            console.log(reviews)
+            let reviews = await prisma.resenia.findMany();
+            
+            reviews.forEach(review => {
+                review.fecha = review.fecha.toISOString()
+            })
+            
             return reviews
         }
     },
