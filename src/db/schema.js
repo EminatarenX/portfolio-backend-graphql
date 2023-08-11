@@ -33,7 +33,7 @@ const typeDefs = gql`
             nombre: String
             correo: String
             mensaje: String
-            telefono: Int
+            telefono: String
         }
         input UsuarioInput {
             nombre: String!
@@ -49,7 +49,7 @@ const typeDefs = gql`
             nombre: String!
             correo: String!
             mensaje: String!
-            telefono: Int!
+            telefono: String!
         }
         
         type Query {
