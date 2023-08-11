@@ -28,16 +28,19 @@ const resolvers = {
                 await prisma.$disconnect()
             }
         },
-        obtenerUsuario: async (_, { token }) => {
-            const usuarioId = await jwt.verify(token, process.env.SECRET)
-
-            return usuarioId
+        obtenerUsuario: async (_, {}, ctx) => {
+            const usuario = ctx.usuario
+            return usuario
         },
         obtenerMensajes: async (_,{}, ctx ) => {
             
             try {
                 
-                let mensajes = await prisma.mensaje.findMany();
+                let mensajes = await prisma.mensaje.findMany({
+                    orderBy: {
+                        fecha: 'desc'
+                    }
+                });
                 
                 mensajes.forEach(mensaje => {
                     mensaje.fecha = mensaje.fecha.toISOString()

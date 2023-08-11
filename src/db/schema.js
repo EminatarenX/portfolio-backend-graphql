@@ -57,7 +57,7 @@ const typeDefs = gql`
             obtenerReviews: [Review]
 
             # Auth
-            obtenerUsuario(token: String!): Usuario
+            obtenerUsuario: Usuario
 
             # Mensajes
             obtenerMensajes: [Mensaje]
