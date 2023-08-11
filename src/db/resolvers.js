@@ -29,7 +29,11 @@ const resolvers = {
             }
         },
         obtenerUsuario: async (_, {}, ctx) => {
+            
             const usuario = ctx.usuario
+            if(!usuario) {
+                throw new Error('No hay usuario autenticado')
+            }
             return usuario
         },
         obtenerMensajes: async (_,{}, ctx ) => {
