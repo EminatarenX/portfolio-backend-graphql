@@ -118,7 +118,7 @@ const resolvers = {
         },
         crearMensaje: async (_, { input }) => {
             const { nombre, correo, mensaje, telefono } = input;
-            
+   
             try {
                 
                 let nuevoMensaje = await prisma.mensaje.create({

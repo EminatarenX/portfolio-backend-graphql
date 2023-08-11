@@ -32,5 +32,5 @@ model mensaje {
   nombre      String
   correo  String
   mensaje String
-  telefono Int
+  telefono String
 }
